@@ -1,5 +1,4 @@
 # let's create a simple todo list app in python and then we'll port it to other languages
-
 import sys
 
 # check to see if there are no arguments (always one because it is <python3 todo.py>
@@ -20,13 +19,13 @@ if n == 2 and sys.argv[1] == '-list':
     print("[TODO LIST]\n")
     todoFile = open("list", "r")
     todoList = todoFile.readlines()
-    for i in todoList:
-        print (i)
+    for idx, val in enumerate(todoList):
+        print ("[" + str(idx + 1) + "]: " + val)
         todoFile.close()
 
 if n > 2 and sys.argv[1] == '-add':
     # append sys.argv[2] to list file
-    print("appending " + sys.argv[2] + " to the list file")
+    print("\nAdding Entry: -> " + sys.argv[2] + "\n")
     todoFile = open("list", "a")
     todoFile.write(sys.argv[2] + "\n")
     todoFile.close()
@@ -35,14 +34,13 @@ if n > 2 and sys.argv[1] == '-rm':
     # Remove element sys.argv[2] from list file
     # So we need to read the file, store all the lines in an array, copy the array but
     # remove the selected element, and then write (not append) to 'list' file
-    print("removing element " + sys.argv[2] + " from list file")
     todoFile = open("list", "r")
     todoList = todoFile.readlines()
     todoFile.close()
     choice = int(sys.argv[2])
     # add out of bounds checking in future version, dont' just assume -1 will be valid (could be negative if person entered element 0
     if choice > 0 and choice <= len(todoList):
-        print("Removing Entry #" + sys.argv[2] + " -> " + todoList[choice-1])
+        print("\nRemoving Entry #" + sys.argv[2] + " -> " + todoList[choice-1])
         todoFile = open("list", "w")
         for idx, val in enumerate(todoList):
             if idx + 1 != choice:
