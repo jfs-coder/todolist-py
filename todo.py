@@ -17,7 +17,12 @@ if n == 2 and sys.argv[1] == '-list':
     # check to see if list file exists, if not then print error
     # read list file and display it here in a loop
     print("[TODO LIST]\n")
-    todoFile = open("list", "r")
+    try:
+        todoFile = open("list", "r")
+    except: 
+        print("No entries found. Add some things to do using <python3 todo.py -add 'something to do'>\n")
+        exit()
+
     todoList = todoFile.readlines()
     for idx, val in enumerate(todoList):
         print ("[" + str(idx + 1) + "]: " + val)
