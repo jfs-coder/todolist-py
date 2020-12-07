@@ -5,22 +5,22 @@ import sys
 n = len(sys.argv)
 
 if n == 1:
-    print ("For Help: python3 todo.py -help")
+    print ("For Help: python3 todo.py help")
 
-if n == 2 and sys.argv[1] == '-help':
+if n == 2 and sys.argv[1] == 'help':
     print ("Usage:")
-    print ("todo -list (lists all elements)")
-    print ("todo -add 'something to do'")
-    print ("todo -rm 3 (removes element 3 from list)")
+    print ("todo list (lists all elements)")
+    print ("todo add 'something to do'")
+    print ("todo rm 3 (removes element 3 from list)")
 
-if n == 2 and sys.argv[1] == '-list':
+if n == 2 and sys.argv[1] == 'list':
     # check to see if list file exists, if not then print error
     # read list file and display it here in a loop
     print("[TODO LIST]\n")
     try:
         todoFile = open("list", "r")
     except: 
-        print("No entries found. Add some things to do using <python3 todo.py -add 'something to do'>\n")
+        print("No entries found. Add some things to do using <python3 todo.py add 'something to do'>\n")
         exit()
 
     todoList = todoFile.readlines()
@@ -28,14 +28,14 @@ if n == 2 and sys.argv[1] == '-list':
         print ("[" + str(idx + 1) + "]: " + val)
         todoFile.close()
 
-if n > 2 and sys.argv[1] == '-add':
+if n > 2 and sys.argv[1] == 'add':
     # append sys.argv[2] to list file
     print("\nAdding Entry: -> " + sys.argv[2] + "\n")
     todoFile = open("list", "a")
     todoFile.write(sys.argv[2] + "\n")
     todoFile.close()
 
-if n > 2 and sys.argv[1] == '-rm':
+if n > 2 and sys.argv[1] == 'rm':
     # Remove element sys.argv[2] from list file
     # So we need to read the file, store all the lines in an array, copy the array but
     # remove the selected element, and then write (not append) to 'list' file
